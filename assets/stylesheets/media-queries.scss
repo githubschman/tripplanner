@@ -1,0 +1,30 @@
+$map: (sm: 768px, md: 992px, lg: 1200px);
+
+
+@mixin buildCol($mapItem){
+	$num: 1;
+
+	@while $num <= 12 {
+		.col-#{$mapItem}-#{$num} {
+		width: $num/12 * 100%;
+		float: right;
+		margin: 0 auto;
+		padding: 10px;
+		padding-bottom: 5px;
+		position: relative;
+	}
+
+	$num: $num + 1 
+
+	}
+}
+
+
+@each $mapItem, $width in $map{
+	@media (min-width: $width){
+	@include buildCol($mapItem);
+
+
+
+	}
+}

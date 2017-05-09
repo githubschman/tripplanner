@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="title" href="#">Tripplanner</a>
+			<a href="#"><img id="logo" src="images/trip-logo.png"></a>
+    </div>
+
+  </div>
+</nav>
+
+
+
+<div class="col-sm-12 col-lg-8" id="map"></div>
+
+<script>
+	function initMap() {
+		var uluru = {lat: 51.276, lng: 30.221};
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 15,
+			center: uluru,
+			styles: [{"featureType":"administrative","elementType":"all","stylers":[{"saturation":"-100"}]},{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape","elementType":"all","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","elementType":"all","stylers":[{"saturation":-100},{"lightness":"50"},{"visibility":"simplified"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":"-100"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"all","stylers":[{"lightness":"30"}]},{"featureType":"road.local","elementType":"all","stylers":[{"lightness":"40"}]},{"featureType":"transit","elementType":"all","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]},{"featureType":"water","elementType":"labels","stylers":[{"lightness":-25},{"saturation":-100}]}]
+
+		});
+		var marker = new google.maps.Marker({
+			position: uluru,
+			map: map
+		});
+	}
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnD4ejx7pM0dsVNFgKUaDFLzfU4ZlooDg&callback=initMap">
+</script>
+
+<div class="col-sm-12 col-lg-4"></div>
+
+
+
+
+<div class="row">
+	<div class="panel panel-default col-sm-12 col-lg-4">
+		<div class="panel-heading"><h1>Day One</h1></div>
+		<div class="panel-body">
+		<h2>My Hotel</h2>
+			<p>  {{hotelEx.name}} &#x2716; </p>
+		<h2>My Activities</h2>
+			<p>	{{activityEx.name}} &#x2716; </p>
+		<h2>My Restaurants</h2>
+			<p> 	{{foodEx.name}} &#x2716; </p>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="row" style="margin-bottom: 20px">
+	<div class="col-lg-4">
+		<h1>Accommodations</h1>
+		 <select>
+		{% for hotel in hotels %}
+		  <option value="hotel">{{hotel.name}}</option>
+		{% endfor %}
+		</select>
+	</div>
+	<div class="col-lg-4">
+		<h1>Restaurants</h1>
+		 <select>
+		{% for restaurant in restaurants %}
+		  <option value="restaurant">{{restaurant.name}}</option>
+		{% endfor %}
+		</select>
+	</div>
+	<div class="col-lg-4">
+		<h1>Activities</h1>
+		 <select>
+		{% for activity in activities %}
+		  <option value="activity">{{activity.name}}</option>
+		{% endfor %}
+		</select>
+	</div>
+
+</div>
+
+{% endblock %}
